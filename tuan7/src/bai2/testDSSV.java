@@ -19,18 +19,17 @@ public class testDSSV {
 
             switch (luaChon) {
                 case 1:
-                    System.out.print("nhap so luong sinh vien: ");
-                    int n = sc.nextInt();
-                    danhSachSV.nhapsv(n);
+                    danhSachSV.nhapDSSV();
                     break;
                 case 2:
                     System.out.println("danh sach sinh vien:");
-                    danhSachSV.inds();
+                    danhSachSV.xuatDSSV();
+
                     break;
                 case 3:
                     System.out.println("danh sach sinh vien sau khi sap xep giam dan theo diem trung binh:");
                     danhSachSV.sapxepgiamdan();
-                    danhSachSV.inds();
+                    danhSachSV.xuatDSSV();
                     break;
                 case 4:
                     System.out.println("thoat chuong trinh.");

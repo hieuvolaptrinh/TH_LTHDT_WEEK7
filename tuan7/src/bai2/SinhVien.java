@@ -3,37 +3,45 @@ package bai2;
 import java.util.Calendar;
 import java.util.Scanner;
 
-public class SinhVien implements  Comparable<SinhVien>{
+public class SinhVien {
     Scanner sc = new Scanner(System.in);
     private String maSV;
     private String hoTen;
     private Calendar ngaySinh;
     private float diemTB;
+    private String hocLuc;
 
-    public SinhVien(String maSV, String hoTen, Calendar ngaySinh, float diemTB) {
-        this.maSV = maSV;
-        this.hoTen = hoTen;
-        this.ngaySinh = ngaySinh;
+    public SinhVien(float diemTB, String hoTen, String maSV, Calendar ngaySinh, String hocLuc) {
         this.diemTB = diemTB;
-    }
-
-    public SinhVien() {
-    }
-
-    public String getMaSV() {
-        return maSV;
-    }
-
-    public void setMaSV(String maSV) {
-        this.maSV = maSV;
-    }
-
-    public String getHoTen() {
-        return hoTen;
-    }
-
-    public void setHoTen(String hoTen) {
         this.hoTen = hoTen;
+        this.maSV = maSV;
+        this.ngaySinh = ngaySinh;
+        this.hocLuc= xepLoai();
+    }
+    public SinhVien() {
+
+    }
+
+    // Phương thức nhập thông tin
+    public void nhapThongTin() {
+        System.out.println("nhập mã sinh viên: ");
+        this.maSV = sc.nextLine();
+        System.out.println("nhập họ tên sinh viên: ");
+        this.hoTen = sc.nextLine();
+
+        System.out.println("nhập năm sinh: ");
+        int nam = sc.nextInt();
+        System.out.println("nhập tháng sinh: ");
+        int thang = sc.nextInt();
+        System.out.println("nhập ngày sinh: ");
+        int ngay = sc.nextInt();
+        sc.nextLine();
+        this.ngaySinh = Calendar.getInstance();
+        this.ngaySinh.set(nam, thang - 1, ngay);  // Tháng bắt đầu từ 0 nên phải trừ 1
+        System.out.println("nhập điểm trung bình: ");
+        this.diemTB = sc.nextFloat();
+        sc.nextLine();
+        this.hocLuc= xepLoai();
     }
 
     public float getDiemTB() {
@@ -52,34 +60,46 @@ public class SinhVien implements  Comparable<SinhVien>{
         this.ngaySinh = ngaySinh;
     }
 
-    public void nhapThongTin(){
-        System.out.println("Nhap ma sinh vien: ");
-        this.maSV = sc.nextLine();
-        System.out.println("Nhap ho ten sinh vien: ");
-        this.hoTen = sc.nextLine();
-
-        System.out.println("Nhap nam sinh: ");
-        int nam = sc.nextInt();
-        System.out.println("Nhap thang sinh: ");
-        int thang = sc.nextInt();
-        System.out.println("Nhap ngay sinh: ");
-        int ngay = sc.nextInt();
-        sc.nextLine();
-        this.ngaySinh= Calendar.getInstance();
-        this.ngaySinh.set(nam, thang - 1, ngay);  // Tháng tính từ 0, nên phải trừ 1
-        System.out.println("Nhap diem trung binh: ");
-        this.diemTB = sc.nextFloat();
-    }
-    public void inThongTin(){
-        System.out.println("Ma sinh vien: "+this.maSV);
-        System.out.println("Ho ten sinh vien: "+this.hoTen);
-        System.out.println("Ngay sinh: "+this.ngaySinh.get(Calendar.DATE)+"/"+(this.ngaySinh.get(Calendar.MONTH)+1)+"/"+this.ngaySinh.get(Calendar.YEAR));
-        System.out.println("Diem trung binh: "+this.diemTB);
-        System.out.println("------------------------------------------------------------");
+    public String getMaSV() {
+        return maSV;
     }
 
-    @Override
-    public int compareTo(SinhVien o) {
-        return Float.compare(this.diemTB, o.diemTB);
+    public void setMaSV(String maSV) {
+        this.maSV = maSV;
     }
+
+    public String getHoTen() {
+        return hoTen;
+    }
+
+    public void setHoTen(String hoTen) {
+        this.hoTen = hoTen;
+    }
+
+    // Phương thức xác định học lực dựa trên điểm trung bình
+    private String xepLoai() {
+        if (this.diemTB >= 9) {
+            return "Giỏi";
+        } else if (this.diemTB >= 7.5) {
+            return "Khá";
+        } else if (this.diemTB >= 5) {
+            return "Trung bình";
+        } else {
+            return "Yếu";
+        }
+    }
+
+    // Phương thức hiển thị thông tin sinh viên
+    public void hienThiThongTin() {
+        System.out.println("Mã sinh viên: " + this.maSV);
+        System.out.println("Họ tên: " + this.hoTen);
+        System.out.println("Ngày sinh: " + this.ngaySinh.get(Calendar.DAY_OF_MONTH) + "/" +
+                (this.ngaySinh.get(Calendar.MONTH) + 1) + "/" + this.ngaySinh.get(Calendar.YEAR));
+        System.out.println("Điểm trung bình: " + this.diemTB);
+        System.out.println("Học lực: " + this.hocLuc);
+    }
+
+    // Phương thức so sánh để sắp xếp sinh viên theo điểm trung bình
+
+
 }
