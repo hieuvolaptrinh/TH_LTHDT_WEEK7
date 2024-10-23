@@ -76,7 +76,6 @@ public class TaiKhoan_Vo_Nguyen_Dai_Hieu {
                 }
             }
         } while (check == false);
-
     }
     //    phương thức rút tiền
     public void rutTien(long tienRut) {
